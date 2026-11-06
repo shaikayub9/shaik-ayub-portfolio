@@ -1,0 +1,48 @@
+/* ==========================================================================
+   Premium layer: soft hero glow, glass cards, calm hover states (no glowing shadows).
+   ========================================================================== */
+html { scrollbar-width: thin; scrollbar-color: #1e2b34 #080c11; }
+::selection { background: rgba(3, 255, 255, 0.28); color: #fff; }
+
+/* the animated background shows through the hero like every other section */
+body.premium .hero { background: transparent; }
+body.premium .hero::before {
+  content: ""; position: absolute; z-index: -1; pointer-events: none;
+  left: -8%; top: -6%; width: 62vw; height: 86%;
+  background: radial-gradient(closest-side, rgba(3, 255, 255, 0.08), transparent 72%);
+}
+
+body.premium .hero-title em {
+  background: linear-gradient(90deg, #03ffff 0%, #6ffbff 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+body.premium .section-title .subtitle { letter-spacing: 0.28em; font-size: 0.74rem; }
+
+/* cards: glass look, hover only brightens the border (no glow) */
+body.premium :is(.cred-card, .tech-card, .profile-card, .exp-card, .pf .pf-card) {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.012)), rgba(12, 18, 25, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 18px 50px -28px rgba(0, 0, 0, 0.9), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  transition: border-color 0.3s, transform 0.3s;
+}
+body.premium :is(.cred-card, .tech-card, .profile-card, .exp-card, .pf .pf-card):hover {
+  border-color: rgba(3, 255, 255, 0.3);
+  box-shadow: 0 18px 50px -28px rgba(0, 0, 0, 0.9), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+@media (min-width: 992px) {
+  body.premium :is(.cred-card, .tech-card, .profile-card, .exp-card) {
+    -webkit-backdrop-filter: blur(14px) saturate(1.3); backdrop-filter: blur(14px) saturate(1.3);
+  }
+}
+
+/* no glowing hover shadows on buttons */
+body.premium .tech-skills .tech-card:hover,
+body.premium .credentials .cred-card:hover,
+body.premium .portfolio .portfolio-bottom .btn-accent:hover,
+body.premium .pf-btn-primary:hover { box-shadow: none; }
+body.premium .credentials .cred-card:hover,
+body.premium .tech-skills .tech-card:hover { box-shadow: 0 18px 50px -28px rgba(0, 0, 0, 0.9), inset 0 1px 0 rgba(255, 255, 255, 0.05); }
+
+/* animated background layer (versions 2 and 6) */
+.bgfx { position: fixed; inset: 0; z-index: -2; pointer-events: none; overflow: hidden; }
+.bgfx canvas { display: block; width: 100%; height: 100%; }
