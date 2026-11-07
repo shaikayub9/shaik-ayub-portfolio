@@ -1,0 +1,59 @@
+/* Hero alignment variants (desktop only; phones and tablets keep the stacked layout).
+   index1.html = previous hero (no class), index2.html = body.hero-v2, index3.html = body.hero-v3.
+
+   How it works: the photo is stretched to the height of the text block and the image is
+   shifted up by exactly the amount of empty space above the head (12.1% of the image),
+   so the top of the head always sits on the first line of the text block, at any screen width. */
+
+@media (min-width: 992px) {
+
+  .hero-v2 .hero,
+  .hero-v3 .hero {
+    min-height: 0;
+    padding-top: calc(var(--header-h) + 40px);
+    padding-bottom: 0;
+  }
+
+  .hero-v2 .hero .hero-inner,
+  .hero-v3 .hero .hero-inner { align-items: stretch; }
+
+  /* Photo column: fills the full height of the text block */
+  .hero-v2 .hero .hero-photo,
+  .hero-v3 .hero .hero-photo {
+    --lift: 64px;                  /* extra dark space above the head that fades in, so no box edge shows */
+    position: relative;
+    align-self: stretch;
+    min-height: 0;
+    margin-top: calc(-1 * var(--lift));
+    /* fades: sides, a soft top that is fully clear by the head line, and the usual bottom fade */
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 18%, #000 82%, transparent), linear-gradient(180deg, transparent, #000 var(--lift), #000 calc(100% - var(--hero-fade)), transparent);
+    -webkit-mask-composite: source-in;
+    mask-image: linear-gradient(90deg, transparent, #000 18%, #000 82%, transparent), linear-gradient(180deg, transparent, #000 var(--lift), #000 calc(100% - var(--hero-fade)), transparent);
+    mask-composite: intersect;
+  }
+
+  .hero-v2 .hero .hero-photo img,
+  .hero-v3 .hero .hero-photo img {
+    position: absolute;
+    top: var(--lift);
+    left: 50%;
+    width: auto;
+    max-width: none;
+    height: calc((100% - var(--lift)) * 1.138);   /* so the image still reaches the bottom after the shift below */
+    margin: 0;
+    transform: translate(-51.8%, -12.1%);   /* head centre in the column, head top on the first line */
+  }
+
+  .hero-v2 .hero .hero-copy,
+  .hero-v3 .hero .hero-copy {
+    align-self: start;
+    padding: 0 0 clamp(40px, 6vh, 64px);
+  }
+}
+
+/* index3: the headline is the first line; the "open to work" badge moves under the social icons */
+@media (min-width: 992px) {
+  .hero-v3 .hero .hero-copy { display: flex; flex-direction: column; align-items: flex-start; }
+  .hero-v3 .hero .hero-status { order: 7; margin: 26px 0 0; }
+  .hero-v3 .hero .hero-title { margin-top: -0.08em; }
+}
