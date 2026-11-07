@@ -1,0 +1,143 @@
+/* ==========================================================================
+   Dark / light theme
+   - Dark is the default and is exactly the original design.
+   - Light is switched on by <html data-theme="light"> (see assets/js/theme.js).
+   Colours are variables, so changing a palette value here changes the whole site.
+   ========================================================================== */
+
+/* ---- Light palette ------------------------------------------------------- */
+:root[data-theme="light"] {
+  color-scheme: light;
+  --background-color: #f3f6f8;   /* page */
+  --default-color: #475662;      /* body text    (contrast on page: 6.9:1) */
+  --heading-color: #0c1a23;      /* headings     (16:1) */
+  --accent-color: #00717e;       /* deep teal    (5.4:1 on page, 6.1:1 on white) */
+  --surface-color: #ffffff;      /* cards */
+  --contrast-color: #ffffff;     /* text on accent */
+  --nav-color: #34444f;
+  --nav-hover-color: #00717e;
+  --nav-mobile-background-color: #ffffff;
+  --nav-dropdown-background-color: #ffffff;
+  --nav-dropdown-color: #34444f;
+  --nav-dropdown-hover-color: #00717e;
+}
+
+/* ---- Areas that stay dark in light mode (footer and loading screen) ---- */
+:root[data-theme="light"] :is(.footer, #preloader) {
+  color-scheme: dark;
+  --background-color: #080c11;
+  --default-color: #d9d9d9;
+  --heading-color: #ededed;
+  --accent-color: #03ffff;
+  --surface-color: #0f151c;
+  --contrast-color: #141414;
+}
+:root[data-theme="light"] .footer { background: #0a0f14; background-color: #0a0f14; }
+/* The footer paints its own dark band and carries its own points canvas, so it scrolls with the page (no lag or shaking). */
+.footer .footfx { display: none; position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+:root[data-theme="light"] .footer .footfx { display: block; }
+.footer > .footer-main, .footer > .footer-bottom { position: relative; z-index: 1; }
+
+/* ---- Header -------------------------------------------------------------- */
+.logo-for-light { display: none; }
+:root[data-theme="light"] .logo-for-dark { display: none; }
+:root[data-theme="light"] .logo-for-light { display: block; }
+:root[data-theme="light"] .scrolled .header,
+:root[data-theme="light"] .index-page.scrolled .header { --background-color: rgba(243, 246, 248, 0.86); box-shadow: 0 1px 0 rgba(12, 26, 35, 0.08); }
+:root[data-theme="light"] .header .btn-getstarted:hover { color: #fff; }
+@media (max-width: 1199px) {
+  :root[data-theme="light"] .mobile-nav-toggle { color: #0c1a23; border-color: rgba(12, 26, 35, 0.2); background: rgba(255, 255, 255, 0.6); }
+  :root[data-theme="light"] .mobile-nav-active .mobile-nav-toggle { color: #0c1a23; background: rgba(0, 113, 126, 0.08); }
+  :root[data-theme="light"] .mobile-nav-active .navmenu { background: rgba(243, 246, 248, 0.92); }
+  :root[data-theme="light"] .mobile-nav-active .navmenu > ul { background: #ffffff; border-color: rgba(12, 26, 35, 0.1); box-shadow: 0 30px 60px -30px rgba(12, 26, 35, 0.4); }
+  :root[data-theme="light"] .navmenu a, :root[data-theme="light"] .navmenu a:focus { color: #34444f; }
+  :root[data-theme="light"] .navmenu a:hover, :root[data-theme="light"] .navmenu .active, :root[data-theme="light"] .navmenu .active:focus { background: rgba(0, 113, 126, 0.08); }
+  :root[data-theme="light"] .navmenu .nav-cta a, :root[data-theme="light"] .navmenu .nav-cta a:focus,
+  :root[data-theme="light"] .navmenu .nav-cta a.active, :root[data-theme="light"] .navmenu .nav-cta a.active:focus { background: #00717e; color: #fff; }
+  :root[data-theme="light"] .navmenu .nav-cta a:hover, :root[data-theme="light"] .navmenu .nav-cta a.active:hover { background: #005c67; color: #fff; }
+}
+
+/* ---- Hero ---------------------------------------------------------------- */
+:root[data-theme="light"] body.premium .hero::before { display: none; }
+:root[data-theme="light"] .hero .hero-title,
+:root[data-theme="light"] .hero .hero-role { color: var(--heading-color); }
+:root[data-theme="light"] body.premium .hero-title em { background: linear-gradient(90deg, #00717e 0%, #0096a8 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+:root[data-theme="light"] .hero .hero-intro { color: #4c5b66; }
+:root[data-theme="light"] .hero .hero-btn-fill { color: #fff; }
+:root[data-theme="light"] .hero .hero-btn-line:hover { background: rgba(0, 113, 126, 0.08); }
+:root[data-theme="light"] .hero .hero-status { color: #0b7a4f; background: rgba(11, 122, 79, 0.08); border-color: rgba(11, 122, 79, 0.28); }
+:root[data-theme="light"] .hero .hero-status i { background: #12a36a; }
+:root[data-theme="light"] .hero .social-links a { color: #2c3b46; border-color: rgba(12, 26, 35, 0.16); background: rgba(255, 255, 255, 0.7); }
+:root[data-theme="light"] .hero .social-links a:hover { color: var(--accent-color); border-color: var(--accent-color); }
+
+/* The portrait has a dark studio backdrop. In light mode it sits in a rounded dark frame instead of fading into the page. */
+@media (min-width: 992px) {
+  :root[data-theme="light"] .hero-v2 .hero .hero-photo {
+    --lift: 34px;
+    -webkit-mask-image: none; mask-image: none;
+    border-radius: 28px; overflow: hidden; background: #0a1015;
+    box-shadow: 0 34px 70px -34px rgba(12, 26, 35, 0.5);
+  }
+}
+@media (max-width: 991px) {
+  :root[data-theme="light"] .hero .hero-photo {
+    -webkit-mask-image: none; mask-image: none;
+    border-radius: 26px; background: #0a1015; box-shadow: 0 30px 60px -34px rgba(12, 26, 35, 0.5);
+  }
+}
+
+/* ---- Cards (glass look from premium.css, light version) ------------------- */
+:root[data-theme="light"] body.premium :is(.cred-card, .tech-card, .profile-card, .exp-card, .pf .pf-card) {
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid rgba(12, 26, 35, 0.09);
+  box-shadow: 0 16px 36px -26px rgba(12, 26, 35, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+:root[data-theme="light"] body.premium :is(.cred-card, .tech-card, .profile-card, .exp-card, .pf .pf-card):hover {
+  border-color: rgba(0, 113, 126, 0.4);
+  box-shadow: 0 16px 36px -26px rgba(12, 26, 35, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+:root[data-theme="light"] body.premium .credentials .cred-card:hover,
+:root[data-theme="light"] body.premium .tech-skills .tech-card:hover { box-shadow: 0 16px 36px -26px rgba(12, 26, 35, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.9); }
+:root[data-theme="light"] .resume .resume-download:hover { background: rgba(0, 113, 126, 0.08); }
+:root[data-theme="light"] ::selection { background: rgba(0, 113, 126, 0.22); color: #0c1a23; }
+:root[data-theme="light"] { scrollbar-color: #b9c6ce #f3f6f8; }
+
+/* ---- Project preview pop-up, light version ------------------------------- */
+:root[data-theme="light"] .pf-backdrop { background: rgba(12, 26, 35, 0.55); }
+:root[data-theme="light"] .pf-dialog { box-shadow: 0 30px 80px -24px rgba(12, 26, 35, 0.5); }
+:root[data-theme="light"] .pf-browser { background: #e9eef2; box-shadow: 0 12px 30px -20px rgba(12, 26, 35, 0.4); }
+:root[data-theme="light"] .pf-browser-bar { background: #e3e9ee; }
+:root[data-theme="light"] .pf-url { background: #ffffff; }
+:root[data-theme="light"] .pf-tabs { background: #e3e9ee; }
+:root[data-theme="light"] .pf-view.is-mobile { background: #e9eef2; }
+:root[data-theme="light"] .pf-skeleton { background: linear-gradient(100deg, #e3e9ee 30%, #f2f6f8 50%, #e3e9ee 70%); background-size: 200% 100%; }
+:root[data-theme="light"] .pf-hint { background: rgba(255, 255, 255, 0.94); box-shadow: 0 8px 22px -12px rgba(12, 26, 35, 0.45); }
+:root[data-theme="light"] .pf-close:hover { background: var(--accent-color); color: #fff; }
+
+/* ---- Theme switch (bottom left) ------------------------------------------- */
+.theme-switch {
+  position: fixed; left: 14px; bottom: 14px; z-index: 9990; display: flex; gap: 2px; padding: 4px;
+  border-radius: 999px; background: rgba(8, 12, 17, 0.84); border: 1px solid rgba(255, 255, 255, 0.12);
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.8);
+}
+.theme-switch button {
+  display: inline-flex; align-items: center; gap: 7px; height: 32px; padding: 0 14px; border: 0; border-radius: 999px;
+  background: transparent; color: #aab6bf; font: 600 12px/1 "Space Grotesk", system-ui, sans-serif; letter-spacing: 0.04em; cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.theme-switch button:hover { color: #fff; }
+.theme-switch button[aria-pressed="true"] { background: #03ffff; color: #06141a; }
+.theme-switch button:focus-visible { outline: 2px solid #03ffff; outline-offset: 2px; }
+:root[data-theme="light"] .theme-switch { background: rgba(255, 255, 255, 0.9); border-color: rgba(12, 26, 35, 0.12); box-shadow: 0 10px 30px -14px rgba(12, 26, 35, 0.4); }
+:root[data-theme="light"] .theme-switch button { color: #52616c; }
+:root[data-theme="light"] .theme-switch button:hover { color: #0c1a23; }
+:root[data-theme="light"] .theme-switch button[aria-pressed="true"] { background: #00717e; color: #fff; }
+@media (max-width: 575px) { .theme-switch { left: 10px; bottom: 10px; } .theme-switch button { padding: 0 11px; } .theme-switch button span { display: none; } }
+
+/* gentle cross-fade when the theme changes (added for ~0.4s only) */
+html.theme-anim, html.theme-anim *, html.theme-anim *::before, html.theme-anim *::after {
+  transition: background-color 0.35s ease, color 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease, fill 0.35s ease !important;
+}
+
+/* on tablets and phones the copyright line is wide enough to meet the theme switch, so leave it room */
+@media (max-width: 991px) { .footer .footer-bottom { padding-bottom: 58px; } }
